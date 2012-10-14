@@ -8,12 +8,14 @@ Best SEO for django.
 * Add to MIDDLEWARE_CLASSES 'cms.middleware.Redirect',
 * Add this code in your template between <head> and </head>
 
+```python
 	<title>{% if seo.title %}{{ seo.title|safe }}{% else %}{{ title|safe }}{% endif %} &rarr; {{site.name}}</title>
 	<meta name='keywords' content='{% if seo.keywords %}{{ seo.keywords }}{% else %}{{ keywords }}{% endif %}'>
 	<meta name='description' content='{% if seo.description %}{{ seo.description }}{% else %}{{ description }}{% endif %}'>
 	{% for tag in seo.tags.all %}
 		{{tag.display|safe}}
 	{% endfor %}
+```
 
 * ./manage.py syncdb
 
@@ -24,9 +26,9 @@ Best SEO for django.
 * robots.txt
 * SitesGroups
 * Improve
-** https://github.com/thisismess/django-seo-cascade
-** https://github.com/willhardy/django-seo
-** http://pypi.python.org/pypi/django-seo
+	* https://github.com/thisismess/django-seo-cascade
+	* https://github.com/willhardy/django-seo
+	* http://pypi.python.org/pypi/django-seo
 
 # Changelog
 ## 2012.10.14
