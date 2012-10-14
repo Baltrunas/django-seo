@@ -6,7 +6,7 @@ Best SEO for django.
 * Add to TEMPLATE_CONTEXT_PROCESSORS 'seo.context_processors.seo',
 * Add to MIDDLEWARE_CLASSES 'seo.middleware.Host',
 * Add to MIDDLEWARE_CLASSES 'cms.middleware.Redirect',
-* Add this code in your template between <head> and </head>
+* Add this code in your template between &lt;head&gt; and &lt;/head&gt;
 
 ```html
 	<title>{% if seo.title %}{{ seo.title|safe }}{% else %}{{ title|safe }}{% endif %} &rarr; {{site.name}}</title>
@@ -15,6 +15,7 @@ Best SEO for django.
 	{% for tag in seo.tags.all %}
 		{{tag.display|safe}}
 	{% endfor %}
+	<head> and </head>
 ```
 
 * ./manage.py syncdb
