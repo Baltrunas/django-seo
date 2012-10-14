@@ -1,15 +1,29 @@
 # -*- coding: utf-8 -*
 from django.contrib import admin
-from seo.models import MetaData
+from seo.models import Data
+from seo.models import Tag
+from seo.models import Redirect
 
 
-class MetaDataAdmin(admin.ModelAdmin):
+class TagInline(admin.TabularInline):
+	model = Tag
+	extra = 0
+
+
+class DataAdmin(admin.ModelAdmin):
 	list_display = ['title', 'header', 'url', 'public', 'created_at']
 	search_fields = ['title', 'header', 'url', 'public', 'created_at']
 	list_filter = ['public']
 	list_editable = ['public']
+	inlines = [TagInline]
 
-	class Media:
-		js = ('tiny_mce/tiny_mce.js', 'tiny_mce/textareas.js',)
+admin.site.register(Data, DataAdmin)
 
-admin.site.register(MetaData, MetaDataAdmin)
+
+class RedirectAdmin(admin.ModelAdmin):
+	list_display = ['from_sites_list', 'from_url', 'to_site', 'to_url', 'regex', 'public', 'created_at', 'updated_at']
+	search_fields = ['from_sites', 'from_url', 'to_site', 'to_url', 'regex', 'public', 'created_at', 'updated_at']
+	list_filter = ['public', 'regex']
+	list_editable = ['public']
+
+admin.site.register(Redirect, RedirectAdmin)
