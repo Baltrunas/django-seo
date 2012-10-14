@@ -8,7 +8,7 @@ Best SEO for django.
 * Add to MIDDLEWARE_CLASSES 'cms.middleware.Redirect',
 * Add this code in your template between <head> and </head>
 
-```python
+```html
 	<title>{% if seo.title %}{{ seo.title|safe }}{% else %}{{ title|safe }}{% endif %} &rarr; {{site.name}}</title>
 	<meta name='keywords' content='{% if seo.keywords %}{{ seo.keywords }}{% else %}{{ keywords }}{% endif %}'>
 	<meta name='description' content='{% if seo.description %}{{ seo.description }}{% else %}{{ description }}{% endif %}'>
