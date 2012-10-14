@@ -36,6 +36,7 @@ Best SEO for django.
 * Add Teg to template.
 * Add Tag model.
 * Add Redirect model.
+
 ### Fix
 * Rename MetaData model to Data.
 * Improve context_procesor
