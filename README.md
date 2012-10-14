@@ -21,8 +21,8 @@ Best SEO for django.
 
 # Futures
 * Redirects
-** Add logic
-** Add RegEx
+	* Add logic
+	* Add RegEx
 * robots.txt
 * SitesGroups
 * Improve
