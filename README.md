@@ -30,6 +30,8 @@ Best SEO for django.
 	* https://github.com/thisismess/django-seo-cascade
 	* https://github.com/willhardy/django-seo
 	* http://pypi.python.org/pypi/django-seo
+* Add translations
+* Add fixtures
 
 # Changelog
 ## 2012.10.14
