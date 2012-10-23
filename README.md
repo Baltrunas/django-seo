@@ -5,7 +5,7 @@ Best SEO for django.
 * Add to INSTALLED_APPS 'seo', 
 * Add to TEMPLATE_CONTEXT_PROCESSORS 'seo.context_processors.seo',
 * Add to MIDDLEWARE_CLASSES 'seo.middleware.Host',
-* Add to MIDDLEWARE_CLASSES 'cms.middleware.Redirect',
+* Add to MIDDLEWARE_CLASSES 'seo.middleware.Redirect',
 * Add this code in your template between &lt;head&gt; and &lt;/head&gt;
 
 ```html
