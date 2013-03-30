@@ -13,7 +13,7 @@ class TagInline(admin.TabularInline):
 class DataAdmin(admin.ModelAdmin):
 	list_display = ['title', 'header', 'url', 'public', 'created_at']
 	search_fields = ['title', 'header', 'url', 'public', 'created_at']
-	list_filter = ['public']
+	list_filter = ['public', 'sites']
 	list_editable = ['public']
 	inlines = [TagInline]
 
