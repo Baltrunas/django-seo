@@ -24,7 +24,7 @@ msgstr ""
 
 #: models.py:9
 msgid "Header"
-msgstr ""
+msgstr "Kopfzeile"
 
 #: models.py:10
 msgid "Keywords"
@@ -32,7 +32,7 @@ msgstr ""
 
 #: models.py:11
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #: models.py:12
 msgid "URL"
@@ -48,19 +48,19 @@ msgstr ""
 
 #: models.py:15
 msgid "Sites"
-msgstr ""
+msgstr "Seiten"
 
 #: models.py:16 models.py:43 models.py:79
 msgid "Public"
-msgstr ""
+msgstr "veröffentlichen"
 
 #: models.py:17 models.py:44 models.py:80
 msgid "Created At"
-msgstr ""
+msgstr "aktualisiert am"
 
 #: models.py:18 models.py:45 models.py:81
 msgid "Updated At"
-msgstr ""
+msgstr "erstellt am"
 
 #: models.py:28 models.py:29
 msgid "Meta Data"
