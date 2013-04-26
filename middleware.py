@@ -3,6 +3,13 @@ from django import http
 from django.contrib.sites.models import Site
 from seo import models as SEO
 
+from django.conf import settings
+
+if hasattr(settings, 'SITE_ID'):
+	SITE_ID = settings.SITE_ID
+else:
+	SITE_ID = 1
+
 
 class Redirect(object):
 	def process_request(self, request):
@@ -11,7 +18,7 @@ class Redirect(object):
 			try:
 				site = Site.objects.get(domain=host)
 			except Site.DoesNotExist:
-				site = Site.objects.get(pk=1)
+				site = Site.objects.get(pk=SITE_ID)
 
 		redirect_list = SEO.Redirect.objects.filter(from_sites__id=site.id, from_url=request.path_info)
 		if redirect_list:
@@ -30,6 +37,6 @@ class Host(object):
 			try:
 				site = Site.objects.get(domain=host)
 			except Site.DoesNotExist:
-				site = Site.objects.get(pk=1)
+				site = Site.objects.get(pk=SITE_ID)
 		request.site = site
 		request.url = request.path_info
