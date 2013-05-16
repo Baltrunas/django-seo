@@ -91,3 +91,22 @@ class Redirect(models.Model):
 	def __unicode__(self):
 		return '%s &rarr; %s' % (self.from_url, self.to_url)
 	__unicode__.allow_tags = True
+
+
+class SiteSettings(models.Model):
+	site = models.ForeignKey(Site, verbose_name=_('Site'), related_name='settings')
+	language = models.CharField(verbose_name=_('Language'), max_length=32)
+
+	robots = models.TextField(verbose_name=_('robots.txt'), blank=True, null=True)
+
+	public = models.BooleanField(verbose_name=_('Public'), default=True)
+	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
+	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
+
+	class Meta:
+		verbose_name = _('Site Settings')
+		verbose_name_plural = _('Sites Settings')
+
+	def __unicode__(self):
+		return '%s &rarr; %s' % (self.site, self.language)
+	__unicode__.allow_tags = True

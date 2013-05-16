@@ -3,6 +3,7 @@ from django.contrib import admin
 from seo.models import Data
 from seo.models import Tag
 from seo.models import Redirect
+from seo.models import SiteSettings
 
 
 class TagInline(admin.TabularInline):
@@ -27,3 +28,12 @@ class RedirectAdmin(admin.ModelAdmin):
 	list_editable = ['public']
 
 admin.site.register(Redirect, RedirectAdmin)
+
+
+class SiteSettingsAdmin(admin.ModelAdmin):
+	list_display = ['site', 'language']
+	search_fields = ['site', 'language']
+	list_filter = ['site', 'language']
+
+
+admin.site.register(SiteSettings, SiteSettingsAdmin)
