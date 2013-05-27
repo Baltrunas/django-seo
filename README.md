@@ -1,20 +1,18 @@
 # django-cms
-Best SEO for django.
+Best SEO for django. Allow to configure robots.txt, locale for domain, setup title, keywords, description, seo texts for all pages in admin panel.
+
 
 # Install
 * Add to INSTALLED_APPS ```'seo',```
 * Add to TEMPLATE_CONTEXT_PROCESSORS ```'seo.context_processors.seo',```
 * Add to MIDDLEWARE_CLASSES
-
-```'seo.middleware.Host',
+```
+'seo.middleware.Host',
 'seo.middleware.Redirect',
 'seo.middleware.SwitchLocale',
 ```
-
 * Add to urls.py ```url(r'^robots.txt$', 'seo.views.robots', name='robots'),```
-
 * Add this code in your template between &lt;head&gt; and &lt;/head&gt;
-
 ```html
 <title>{% if seo.title %}{{ seo.title|safe }}{% else %}{{ title|safe }}{% endif %} &rarr; {{site.name}}</title>
 <meta name='keywords' content='{% if seo.keywords %}{{ seo.keywords }}{% else %}{{ keywords }}{% endif %}'>
@@ -23,16 +21,15 @@ Best SEO for django.
 	{{tag.display|safe}}
 {% endfor %}
 ```
-
 * Sync bata base ```./manage.py syncdb```
 
 
 # Futures
 * Redirects
 	* Add logic
-	* Add RegEx
 * SitesGroups
 * Aditional Meta Tags
+	* Templates for meta tags, or textartea for metatext
 	* Canonical
 * Sitemap
 * Add translations
@@ -45,6 +42,11 @@ Best SEO for django.
 
 
 # Changelog
+## 2013.05.24
+### Add
+* Redirects
+	* Add RegEx
+
 ## 2013.05.16
 ###Add
 * Add Site Settings

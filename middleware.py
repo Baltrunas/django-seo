@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*
 from django import http
+import re
+
 from django.contrib.sites.models import Site
 from seo import models as SEO
 
@@ -19,25 +21,28 @@ LANGUAGE_CODE = settings.LANGUAGE_CODE
 
 class Redirect(object):
 	def process_request(self, request):
-		host = request.META.get('HTTP_HOST')
+		from_domain = request.META.get('HTTP_HOST')
+		from_url = request.path_info
 
-		if host == 'www.ronis.de':
-			return http.HttpResponsePermanentRedirect('http://ronis.de' + request.path_info)
+		redirect_list = SEO.Redirect.objects.filter(from_domain=from_domain, public=True)
 
-		if host:
-			try:
-				site = Site.objects.get(domain=host)
-			except Site.DoesNotExist:
-				site = Site.objects.get(pk=SITE_ID)
-
-		redirect_list = SEO.Redirect.objects.filter(from_sites__id=site.id, from_url=request.path_info)
 		if redirect_list:
 			for redirect in redirect_list:
-				if redirect.regex:
-					pass
+				if redirect.to_protocol:
+					to_protocol = redirect.to_protocol
 				else:
-					return http.HttpResponsePermanentRedirect('http://' + redirect.to_site.domain + redirect.to_url)
-		# 	if 'googlebot' in request.META['HTTP_USER_AGENT']:
+					to_protocol = 'http://'
+
+				if redirect.regex:
+					try:
+						redirect_re = re.compile(redirect.from_url)
+						if redirect_re.findall(from_url):
+							to_url = re.sub(redirect.from_url, redirect.to_url, from_url)
+							return http.HttpResponsePermanentRedirect(to_protocol + redirect.to_domain + to_url)
+					except:
+						pass
+				elif redirect.from_url == from_url:
+					return http.HttpResponsePermanentRedirect(to_protocol + redirect.to_domain + redirect.to_url)
 
 
 class Host(object):

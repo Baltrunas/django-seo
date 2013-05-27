@@ -66,31 +66,27 @@ class Tag(models.Model):
 
 
 class Redirect(models.Model):
-	from_sites = models.ManyToManyField(Site, related_name='redirects_out', verbose_name=_('From Sites'))
+	from_protocol = models.CharField(verbose_name=_('To Protocol'), max_length=32, blank=True, null=True, editable=False)
+	from_domain = models.CharField(verbose_name=_('From Domain'), max_length=256, blank=True, null=True)
 	from_url = models.CharField(verbose_name=_('From URL'), max_length=2048)
-	to_protocol = models.CharField(verbose_name=_('To Protocol'), max_length=32)
-	to_site = models.ForeignKey(Site, related_name='redirects_in', verbose_name=_('To Site'))
+
+	to_protocol = models.CharField(verbose_name=_('To Protocol'), max_length=32, blank=True, null=True, editable=False)
+	to_domain = models.CharField(verbose_name=_('To Domain'), max_length=256)
 	to_url = models.CharField(verbose_name=_('To URL'), max_length=2048)
+
 	regex = models.BooleanField(verbose_name=_('RegEx'), default=False)
-	priority = models.PositiveSmallIntegerField(verbose_name=_('Priority'), default=100)
-	condition = models.CharField(verbose_name=_('Condition'), max_length=256)
-	method_of_comparing = models.CharField(verbose_name=_('Method of comparing'), max_length=64)
-	value = models.CharField(verbose_name=_('Value'), max_length=2048)
+
 	public = models.BooleanField(verbose_name=_('Public'), default=True)
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
 	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
 
-	def from_sites_list(self):
-		from_list = [site.domain for site in self.from_sites.all()]
-		return ', '.join(from_list)
+	def __unicode__(self):
+		return '%s%s &rarr; %s%s' % (self.from_domain, self.from_url, self.to_domain, self.to_url)
+	__unicode__.allow_tags = True
 
 	class Meta:
 		verbose_name = _('Redirect')
 		verbose_name_plural = _('Redirects')
-
-	def __unicode__(self):
-		return '%s &rarr; %s' % (self.from_url, self.to_url)
-	__unicode__.allow_tags = True
 
 
 class SiteSettings(models.Model):
