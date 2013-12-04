@@ -92,6 +92,7 @@ class Redirect(models.Model):
 class SiteSettings(models.Model):
 	site = models.ForeignKey(Site, verbose_name=_('Site'), related_name='settings')
 	language = models.CharField(verbose_name=_('Language'), max_length=32)
+	template = models.CharField(verbose_name=_('Template'), help_text=_('Leave this blank to use default template'), max_length=128)
 
 	robots = models.TextField(verbose_name=_('robots.txt'), blank=True, null=True)
 

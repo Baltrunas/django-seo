@@ -1,14 +1,8 @@
 # -*- coding: utf-8 -*
 from django.contrib import admin
 from seo.models import Data
-from seo.models import Tag
 from seo.models import Redirect
 from seo.models import SiteSettings
-
-
-class TagInline(admin.TabularInline):
-	model = Tag
-	extra = 0
 
 
 class DataAdmin(admin.ModelAdmin):
@@ -16,7 +10,6 @@ class DataAdmin(admin.ModelAdmin):
 	search_fields = ['title', 'header', 'url', 'public', 'created_at']
 	list_filter = ['public', 'sites']
 	list_editable = ['public']
-	inlines = [TagInline]
 
 admin.site.register(Data, DataAdmin)
 

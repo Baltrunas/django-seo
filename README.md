@@ -1,4 +1,4 @@
-# django-cms
+# django-seo
 Best SEO for django. Allow to configure robots.txt, locale for domain, setup title, keywords, description, seo texts for all pages in admin panel.
 
 
@@ -24,16 +24,14 @@ Best SEO for django. Allow to configure robots.txt, locale for domain, setup tit
 * Sync bata base ```./manage.py syncdb```
 
 
-# Futures
-* Redirects
-	* Add logic
+# TODO
+* Delete tags, add head code block
+* Change title variables on fly
+* Add logic to redirects
 * SitesGroups
-* Aditional Meta Tags
-	* Templates for meta tags, or textartea for metatext
-	* Canonical
 * Sitemap
 * Add translations
-* Add fixtures
+* Template changer to pages
 * Documentation
 * Improve
 	* https://github.com/thisismess/django-seo-cascade

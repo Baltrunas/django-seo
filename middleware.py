@@ -8,6 +8,8 @@ from seo import models as SEO
 from django.middleware.locale import LocaleMiddleware
 from django.utils import translation
 
+import os
+# PROJECT_PATH = os.path.realpath(os.path.dirname(__file__) + '../')
 
 from django.conf import settings
 
@@ -66,3 +68,19 @@ class SwitchLocale(LocaleMiddleware):
 
 		translation.activate(language)
 		request.LANGUAGE_CODE = language
+
+
+class SwitchTemplate(object):
+	def process_request(self, request):
+		try:
+			template = SEO.SiteSettings.objects.get(site=request.site).template
+
+			if template:
+				# if 'Mobile' in request.META['HTTP_USER_AGENT']:
+				# 	template += '/mobile/'
+
+				settings.TEMPLATE_DIRS = (
+					settings.PROJECT_PATH + template,
+				)
+		except:
+			pass
