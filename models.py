@@ -29,48 +29,16 @@ class Data(models.Model):
 		verbose_name_plural = _('Meta Data')
 
 
-class Tag(models.Model):
-	name = models.CharField(verbose_name=_('Name'), max_length=128)
-	value = models.CharField(verbose_name=_('Info'), max_length=2048, blank=True)
-	TYPE_CHOICES = (
-		('meta', _('Meta')),
-		('js', _('Java Script')),
-		('css', _('CSS')),
-		('string', _('String')),
-	)
-	tag_type = models.CharField(verbose_name=_('Type'), max_length=64, choices=TYPE_CHOICES)
-	data = models.ForeignKey(Data, related_name='tags', verbose_name=_('Data'))
-	public = models.BooleanField(verbose_name=_('Public'), default=True)
-	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
-	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
-
-	def display(self):
-		if self.tag_type == 'meta':
-			return '<meta name="%s" content="%s">' % (self.name, self.value)
-		if self.tag_type == 'css':
-			return '<link rel="stylesheet" href="%s" type="text/css">' % (self.value)
-		if self.tag_type == 'js':
-			return '<script src="%s" type="text/javascript"></script>' % (self.value)
-		if self.tag_type == 'string':
-			return self.value
-		else:
-			return '<meta name="%s" content="%s">' % (self.name, self.value)
-
-	def __unicode__(self):
-		return self.name + ' = ' + self.value
-
-	class Meta:
-		ordering = ['name']
-		verbose_name = _('Meta Tag')
-		verbose_name_plural = _('Meta Tags')
-
-
 class Redirect(models.Model):
-	from_protocol = models.CharField(verbose_name=_('To Protocol'), max_length=32, blank=True, null=True, editable=False)
+	PROTOCOLS = (
+		('http://', _('HTTP')),
+		('https://', _('HTTPS')),
+	)
+	from_protocol = models.CharField(verbose_name=_('From Protocol'), max_length=32, choices=PROTOCOLS)
 	from_domain = models.CharField(verbose_name=_('From Domain'), max_length=256, blank=True, null=True)
 	from_url = models.CharField(verbose_name=_('From URL'), max_length=2048)
 
-	to_protocol = models.CharField(verbose_name=_('To Protocol'), max_length=32, blank=True, null=True, editable=False)
+	to_protocol = models.CharField(verbose_name=_('To Protocol'), max_length=32, choices=PROTOCOLS)
 	to_domain = models.CharField(verbose_name=_('To Domain'), max_length=256)
 	to_url = models.CharField(verbose_name=_('To URL'), max_length=2048)
 

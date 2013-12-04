@@ -8,7 +8,7 @@ from seo import models as SEO
 from django.middleware.locale import LocaleMiddleware
 from django.utils import translation
 
-import os
+# import os
 # PROJECT_PATH = os.path.realpath(os.path.dirname(__file__) + '../')
 
 from django.conf import settings
@@ -26,25 +26,26 @@ class Redirect(object):
 		from_domain = request.META.get('HTTP_HOST')
 		from_url = request.path_info
 
-		redirect_list = SEO.Redirect.objects.filter(from_domain=from_domain, public=True)
+		if request.is_secure():
+			from_protocol = 'https://'
+		else:
+			from_protocol = 'http://'
 
-		if redirect_list:
-			for redirect in redirect_list:
-				if redirect.to_protocol:
-					to_protocol = redirect.to_protocol
-				else:
-					to_protocol = 'http://'
+		redirect_list = SEO.Redirect.objects.filter(from_domain=from_domain, from_protocol=from_protocol, public=True)
 
-				if redirect.regex:
-					try:
-						redirect_re = re.compile(redirect.from_url)
-						if redirect_re.findall(from_url):
-							to_url = re.sub(redirect.from_url, redirect.to_url, from_url)
-							return http.HttpResponsePermanentRedirect(to_protocol + redirect.to_domain + to_url)
-					except:
-						pass
-				elif redirect.from_url == from_url:
-					return http.HttpResponsePermanentRedirect(to_protocol + redirect.to_domain + redirect.to_url)
+		for redirect in redirect_list:
+			if redirect.regex:
+				try:
+					redirect_re = re.compile(redirect.from_url)
+					if redirect_re.findall(from_url):
+						to_url = re.sub(redirect.from_url, redirect.to_url, from_url)
+						result_url = redirect.to_protocol + redirect.to_domain + to_url
+						return http.HttpResponsePermanentRedirect(result_url)
+				except:
+					pass
+			elif redirect.from_url == from_url:
+				result_url = redirect.to_protocol + redirect.to_domain + redirect.to_url
+				return http.HttpResponsePermanentRedirect(result_url)
 
 
 class Host(object):

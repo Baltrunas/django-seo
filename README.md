@@ -14,18 +14,17 @@ Best SEO for django. Allow to configure robots.txt, locale for domain, setup tit
 * Add to urls.py ```url(r'^robots.txt$', 'seo.views.robots', name='robots'),```
 * Add this code in your template between &lt;head&gt; and &lt;/head&gt;
 ```html
-<title>{% if seo.title %}{{ seo.title|safe }}{% else %}{{ title|safe }}{% endif %} &rarr; {{site.name}}</title>
-<meta name='keywords' content='{% if seo.keywords %}{{ seo.keywords }}{% else %}{{ keywords }}{% endif %}'>
-<meta name='description' content='{% if seo.description %}{{ seo.description }}{% else %}{{ description }}{% endif %}'>
-{% for tag in seo.tags.all %}
-	{{tag.display|safe}}
-{% endfor %}
+<title>{% firstof seo.title title %} &rarr; {{site.name}}</title>
+<meta name='keywords' content='{% firstof seo.keywords keywords %}'>
+<meta name='description' content='{% firstof seo.description description %}'>
 ```
 * Sync bata base ```./manage.py syncdb```
 
 
 # TODO
-* Delete tags, add head code block
+* Add head code block
+* Language as model
+* Site languages for multi languages
 * Change title variables on fly
 * Add logic to redirects
 * SitesGroups
@@ -37,9 +36,14 @@ Best SEO for django. Allow to configure robots.txt, locale for domain, setup tit
 	* https://github.com/thisismess/django-seo-cascade
 	* https://github.com/willhardy/django-seo
 	* http://pypi.python.org/pypi/django-seo
-
+	* http://pragmaticstartup.wordpress.com/2013/04/08/12-seo-tips-for-django/
 
 # Changelog
+## 2013.12.04
+* Delete Tags model
+* Add redirects protocol
+* New clear head code
+
 ## 2013.05.24
 ### Add
 * Redirects
