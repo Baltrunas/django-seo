@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-30 15:50+0100\n"
+"POT-Creation-Date: 2013-12-05 11:37+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,138 +19,126 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: models.py:8
+#: models.py:10
 msgid "Title"
 msgstr ""
 
-#: models.py:9
+#: models.py:11
 msgid "Header"
 msgstr ""
 
-#: models.py:10
+#: models.py:12
 msgid "Keywords"
 msgstr ""
 
-#: models.py:11
+#: models.py:13
 msgid "Description"
 msgstr ""
 
-#: models.py:12
+#: models.py:14
 msgid "URL"
 msgstr ""
 
-#: models.py:13
-msgid "Intro Text"
-msgstr ""
+#: models.py:16
+msgid "Intro"
+msgstr "Текст перед контентом"
 
-#: models.py:14
-msgid "Text"
-msgstr ""
+#: models.py:17
+msgid "Outro"
+msgstr "Текст после контента"
 
-#: models.py:15
+#: models.py:19
+msgid "Head Code"
+msgstr "Код для head"
+
+#: models.py:20
+msgid "Footer Code"
+msgstr "Код для footer"
+
+#: models.py:22
 msgid "Sites"
-msgstr ""
+msgstr "Сайты"
 
-#: models.py:16 models.py:43 models.py:79
+#: models.py:23 models.py:54 models.py:88
 msgid "Public"
-msgstr ""
+msgstr "Публикация"
 
-#: models.py:17 models.py:44 models.py:80
+#: models.py:24 models.py:55 models.py:89
 msgid "Created At"
-msgstr ""
+msgstr "Созданно"
 
-#: models.py:18 models.py:45 models.py:81
+#: models.py:25 models.py:56 models.py:90
 msgid "Updated At"
-msgstr ""
+msgstr "Обновленно"
 
-#: models.py:28 models.py:29
+#: models.py:35 models.py:36
 msgid "Meta Data"
-msgstr ""
-
-#: models.py:33
-msgid "Name"
-msgstr ""
-
-#: models.py:34
-msgid "Info"
-msgstr ""
-
-#: models.py:36
-msgid "Meta"
-msgstr ""
-
-#: models.py:37
-msgid "Java Script"
-msgstr ""
-
-#: models.py:38
-msgid "CSS"
-msgstr ""
-
-#: models.py:39
-msgid "String"
-msgstr ""
+msgstr "Метаданные"
 
 #: models.py:41
-msgid "Type"
+msgid "HTTP"
 msgstr ""
 
 #: models.py:42
-msgid "Data"
+msgid "HTTPS"
 msgstr ""
+
+#: models.py:44
+msgid "From Protocol"
+msgstr "С протокола"
+
+#: models.py:45
+msgid "From Domain"
+msgstr "С домена"
+
+#: models.py:46
+msgid "From URL"
+msgstr "С URL"
+
+#: models.py:48
+msgid "To Protocol"
+msgstr "На протокол"
+
+#: models.py:49
+msgid "To Domain"
+msgstr "На домен"
+
+#: models.py:50
+msgid "To URL"
+msgstr "На URL"
+
+#: models.py:52
+msgid "RegEx"
+msgstr "Регулярное выражение"
+
+#: models.py:63
+msgid "Redirect"
+msgstr "Редирект"
 
 #: models.py:64
-msgid "Meta Tag"
-msgstr ""
+msgid "Redirects"
+msgstr "Редиректы"
 
-#: models.py:65
-msgid "Meta Tags"
-msgstr ""
+#: models.py:68
+msgid "Site"
+msgstr "Сайт"
 
 #: models.py:69
-msgid "From Sites"
+msgid "Language"
+msgstr "Язык"
+
+#: models.py:84
+msgid "Template"
+msgstr "Шаблон"
+
+#: models.py:86
+msgid "robots.txt"
 msgstr ""
 
-#: models.py:70
-msgid "From URL"
-msgstr ""
+#: models.py:93
+msgid "Site Settings"
+msgstr "Настройки сайта"
 
-#: models.py:71
-msgid "To Protocol"
-msgstr ""
-
-#: models.py:72
-msgid "To Site"
-msgstr ""
-
-#: models.py:73
-msgid "To URL"
-msgstr ""
-
-#: models.py:74
-msgid "RegEx"
-msgstr ""
-
-#: models.py:75
-msgid "Priority"
-msgstr ""
-
-#: models.py:76
-msgid "Condition"
-msgstr ""
-
-#: models.py:77
-msgid "Method of comparing"
-msgstr ""
-
-#: models.py:78
-msgid "Value"
-msgstr ""
-
-#: models.py:88
-msgid "Redirect"
-msgstr ""
-
-#: models.py:89
-msgid "Redirects"
-msgstr ""
+#: models.py:94
+msgid "Sites Settings"
+msgstr "Настройки сайтов"

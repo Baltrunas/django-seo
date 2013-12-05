@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.sites.models import Site
 from django.utils.translation import ugettext_lazy as _
 
+from django.conf import settings
+
 
 class Data(models.Model):
 	title = models.CharField(verbose_name=_('Title'), max_length=256)
@@ -10,8 +12,13 @@ class Data(models.Model):
 	keywords = models.CharField(verbose_name=_('Keywords'), max_length=1024, blank=True, null=True)
 	description = models.CharField(verbose_name=_('Description'), max_length=2048, blank=True, null=True)
 	url = models.CharField(verbose_name=_('URL'), max_length=2048)
-	intro_text = models.TextField(verbose_name=_('Intro Text'), blank=True, null=True)
-	text = models.TextField(verbose_name=_('Text'), blank=True, null=True)
+
+	intro = models.TextField(verbose_name=_('Intro'), blank=True, null=True)
+	outro = models.TextField(verbose_name=_('Outro'), blank=True, null=True)
+
+	head_code = models.TextField(verbose_name=_('Head Code'), blank=True, null=True)
+	footer_code = models.TextField(verbose_name=_('Footer Code'), blank=True, null=True)
+
 	sites = models.ManyToManyField(Site, related_name='metadata', verbose_name=_('Sites'), null=True, blank=True)
 	public = models.BooleanField(verbose_name=_('Public'), default=True)
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
@@ -60,7 +67,21 @@ class Redirect(models.Model):
 class SiteSettings(models.Model):
 	site = models.ForeignKey(Site, verbose_name=_('Site'), related_name='settings')
 	language = models.CharField(verbose_name=_('Language'), max_length=32)
-	template = models.CharField(verbose_name=_('Template'), help_text=_('Leave this blank to use default template'), max_length=128)
+
+	# TODO: I think it's wrong
+	if hasattr(settings, 'TEMPLATE_DIRS') and settings.TEMPLATE_DIRS:
+		TEMPLATES = []
+		for template_puth in settings.TEMPLATE_DIRS:
+			template_parts = template_puth.split('/')
+			if template_parts[-1]:
+				template_name = template_parts[-1]
+			else:
+				template_name = template_parts[-2]
+			TEMPLATES.append((template_puth, template_name))
+	else:
+		TEMPLATES = False
+
+	template = models.CharField(verbose_name=_('Template'), max_length=128, choices=TEMPLATES, blank=True, null=True)
 
 	robots = models.TextField(verbose_name=_('robots.txt'), blank=True, null=True)
 

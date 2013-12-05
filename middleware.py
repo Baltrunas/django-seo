@@ -73,15 +73,9 @@ class SwitchLocale(LocaleMiddleware):
 
 class SwitchTemplate(object):
 	def process_request(self, request):
-		try:
-			template = SEO.SiteSettings.objects.get(site=request.site).template
+		site_settings = SEO.SiteSettings.objects.filter(site=request.site, public=True).first()
 
-			if template:
-				# if 'Mobile' in request.META['HTTP_USER_AGENT']:
-				# 	template += '/mobile/'
-
-				settings.TEMPLATE_DIRS = (
-					settings.PROJECT_PATH + template,
-				)
-		except:
-			pass
+		if site_settings:
+			settings.TEMPLATE_DIRS = (
+				site_settings.template,
+			) + settings.TEMPLATE_DIRS
