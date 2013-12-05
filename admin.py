@@ -15,7 +15,7 @@ admin.site.register(Data, DataAdmin)
 
 
 class RedirectAdmin(admin.ModelAdmin):
-	list_display = ['from_domain', 'from_url', 'to_domain', 'to_url', 'regex', 'public', 'created_at', 'updated_at']
+	list_display = ['__unicode__', 'regex', 'public', 'created_at', 'updated_at']
 	search_fields = ['from_domain', 'from_url', 'to_domain', 'to_url', 'regex', 'public', 'created_at', 'updated_at']
 	list_filter = ['from_domain', 'to_domain', 'public', 'regex']
 	list_editable = ['public', 'regex']

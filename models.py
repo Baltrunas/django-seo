@@ -56,7 +56,7 @@ class Redirect(models.Model):
 	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
 
 	def __unicode__(self):
-		return '%s%s &rarr; %s%s' % (self.from_domain, self.from_url, self.to_domain, self.to_url)
+		return '%s%s/%s &rarr; %s%s/%s' % (self.from_protocol, self.from_domain, self.from_url, self.to_protocol, self.to_domain, self.to_url)
 	__unicode__.allow_tags = True
 
 	class Meta:
