@@ -62,9 +62,11 @@ class Host(object):
 
 class SwitchLocale(LocaleMiddleware):
 	def process_request(self, request):
-		try:
-			language = SEO.SiteSettings.objects.get(site=request.site).language
-		except:
+		site_settings = SEO.SiteSettings.objects.filter(site=request.site, public=True).first()
+
+		if site_settings and site_settings.language:
+			language = site_settings.language
+		else:
 			language = LANGUAGE_CODE
 
 		translation.activate(language)
@@ -75,7 +77,7 @@ class SwitchTemplate(object):
 	def process_request(self, request):
 		site_settings = SEO.SiteSettings.objects.filter(site=request.site, public=True).first()
 
-		if site_settings:
+		if site_settings and site_settings.template:
 			settings.TEMPLATE_DIRS = (
 				site_settings.template,
 			) + settings.TEMPLATE_DIRS
