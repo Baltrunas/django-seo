@@ -27,6 +27,7 @@ Best SEO app for django. Allow to configure robots.txt, locale for domain, setup
 
 
 # TODO
+* PIP
 * Documentation
 
 * Template changer to pages
