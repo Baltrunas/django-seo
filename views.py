@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*
 from django.template import RequestContext
 from django.template import Template
 
 from django.http import HttpResponse
 
-from seo.models import SiteSettings
+from .models import SiteSettings
 
 
 def robots(request):

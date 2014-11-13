@@ -3,13 +3,14 @@ Best SEO app for django. Allow to configure robots.txt, locale for domain, setup
 
 
 # Install
-* Add to INSTALLED_APPS ```'seo',```
-* Add to TEMPLATE_CONTEXT_PROCESSORS ```'seo.context_processors.seo',```
+* Add to INSTALLED_APPS ```'apps.seo',```
+* Add to TEMPLATE_CONTEXT_PROCESSORS ```'apps.seo.context_processors.seo',```
 * Add to MIDDLEWARE_CLASSES
 ```
-'seo.middleware.Host',
-'seo.middleware.Redirect',
-'seo.middleware.SwitchLocale',
+'apps.seo.middleware.Host',
+'apps.seo.middleware.Redirect',
+'apps.seo.middleware.SwitchLocale',
+'apps.seo.middleware.SwitchTemplate',
 ```
 * Add to urls.py ```url(r'^robots.txt$', 'seo.views.robots', name='robots'),```
 * Add this code in your template between &lt;head&gt; and &lt;/head&gt;

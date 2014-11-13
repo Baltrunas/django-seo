@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*
-from django import http
 import re
 
+from django import http
 from django.contrib.sites.models import Site
-from seo import models as SEO
-
 from django.middleware.locale import LocaleMiddleware
 from django.utils import translation
-
-# import os
-# PROJECT_PATH = os.path.realpath(os.path.dirname(__file__) + '../')
-
 from django.conf import settings
+
+from . import models as SEO
+
 
 if hasattr(settings, 'SITE_ID'):
 	SITE_ID = settings.SITE_ID

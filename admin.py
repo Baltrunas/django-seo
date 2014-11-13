@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*
 from django.contrib import admin
-from seo.models import Data
-from seo.models import Redirect
-from seo.models import SiteSettings
+
+from .models import Data
+from .models import Redirect
+from .models import SiteSettings
 
 
 class DataAdmin(admin.ModelAdmin):
