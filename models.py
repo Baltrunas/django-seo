@@ -94,5 +94,5 @@ class SiteSettings(models.Model):
 		verbose_name_plural = _('Sites Settings')
 
 	def __unicode__(self):
-		return '%s &rarr; %s' % (self.site, self.language)
+		return u'%s &rarr; %s' % (self.site, self.language)
 	__unicode__.allow_tags = True
