@@ -20,4 +20,4 @@ def robots(request):
 	context_instance.update(context)
 
 	html = tpl.render(context_instance)
-	return HttpResponse(html, mimetype='text/plain')
+	return HttpResponse(html, content_type='text/plain')
