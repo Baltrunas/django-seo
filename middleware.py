@@ -8,6 +8,9 @@ from seo import models as SEO
 from django.middleware.locale import LocaleMiddleware
 from django.utils import translation
 
+
+from django.contrib.sites.shortcuts import get_current_site
+
 # import os
 # PROJECT_PATH = os.path.realpath(os.path.dirname(__file__) + '../')
 
@@ -50,13 +53,7 @@ class Redirect(object):
 
 class Host(object):
 	def process_request(self, request):
-		host = request.META.get('HTTP_HOST')
-		if host:
-			try:
-				site = Site.objects.get(domain=host)
-			except Site.DoesNotExist:
-				site = Site.objects.get(pk=SITE_ID)
-		request.site = site
+		request.site = get_current_site(request)
 		request.url = request.path_info
 
 
