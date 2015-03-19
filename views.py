@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*
 from django.template import RequestContext
 from django.template import Template
 
 from django.http import HttpResponse
 
-from seo.models import SiteSettings
+from .models import SiteSettings
 
 
 def robots(request):
@@ -21,4 +20,4 @@ def robots(request):
 	context_instance.update(context)
 
 	html = tpl.render(context_instance)
-	return HttpResponse(html, mimetype='text/plain')
+	return HttpResponse(html, content_type='text/plain')

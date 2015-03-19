@@ -65,7 +65,7 @@ class Redirect(models.Model):
 
 
 class SiteSettings(models.Model):
-	site = models.ForeignKey(Site, verbose_name=_('Site'), related_name='settings')
+	site = models.ForeignKey(Site, verbose_name=_('Site'), related_name='settings', unique=True)
 	language = models.CharField(verbose_name=_('Language'), max_length=32)
 
 	# TODO: I think it's wrong
@@ -94,5 +94,5 @@ class SiteSettings(models.Model):
 		verbose_name_plural = _('Sites Settings')
 
 	def __unicode__(self):
-		return '%s &rarr; %s' % (self.site, self.language)
+		return u'%s &rarr; %s' % (self.site, self.language)
 	__unicode__.allow_tags = True

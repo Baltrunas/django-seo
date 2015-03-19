@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*
-from seo.models import Data
+from .models import Data
 
 
 def seo(request):

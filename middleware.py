@@ -1,27 +1,13 @@
-# -*- coding: utf-8 -*
-from django import http
 import re
 
-from django.contrib.sites.models import Site
-from seo import models as SEO
+from django import http
+from django.contrib.sites.shortcuts import get_current_site
 
 from django.middleware.locale import LocaleMiddleware
 from django.utils import translation
-
-
-from django.contrib.sites.shortcuts import get_current_site
-
-# import os
-# PROJECT_PATH = os.path.realpath(os.path.dirname(__file__) + '../')
-
 from django.conf import settings
 
-if hasattr(settings, 'SITE_ID'):
-	SITE_ID = settings.SITE_ID
-else:
-	SITE_ID = 1
-
-LANGUAGE_CODE = settings.LANGUAGE_CODE
+from . import models as SEO
 
 
 class Redirect(object):
@@ -59,10 +45,12 @@ class Host(object):
 
 class SwitchLocale(LocaleMiddleware):
 	def process_request(self, request):
-		try:
-			language = SEO.SiteSettings.objects.get(site=request.site).language
-		except:
-			language = LANGUAGE_CODE
+		site_settings = SEO.SiteSettings.objects.filter(site=request.site, public=True).first()
+
+		if site_settings and site_settings.language:
+			language = site_settings.language
+		else:
+			language = settings.LANGUAGE_CODE
 
 		translation.activate(language)
 		request.LANGUAGE_CODE = language
@@ -72,7 +60,7 @@ class SwitchTemplate(object):
 	def process_request(self, request):
 		site_settings = SEO.SiteSettings.objects.filter(site=request.site, public=True).first()
 
-		if site_settings:
+		if site_settings and site_settings.template:
 			settings.TEMPLATE_DIRS = (
 				site_settings.template,
 			) + settings.TEMPLATE_DIRS
