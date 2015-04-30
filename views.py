@@ -3,15 +3,12 @@ from django.template import Template
 
 from django.http import HttpResponse
 
-from .models import SiteSettings
-
 
 def robots(request):
 	context = {}
-	try:
-		context['site_settings'] = SiteSettings.objects.get(site=request.site)
-		robots_template = context['site_settings'].robots
-	except:
+	if hasattr(request.site, 'settings'):
+		robots_template = request.site.settings.robots 
+	else:
 		robots_template = ''
 
 	tpl = Template(robots_template)

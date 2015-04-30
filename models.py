@@ -19,7 +19,7 @@ class Data(models.Model):
 	head_code = models.TextField(verbose_name=_('Head Code'), blank=True, null=True)
 	footer_code = models.TextField(verbose_name=_('Footer Code'), blank=True, null=True)
 
-	sites = models.ManyToManyField(Site, related_name='metadata', verbose_name=_('Sites'), null=True, blank=True)
+	sites = models.ManyToManyField(Site, related_name='metadata', verbose_name=_('Sites'), blank=True)
 	public = models.BooleanField(verbose_name=_('Public'), default=True)
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
 	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
@@ -65,7 +65,7 @@ class Redirect(models.Model):
 
 
 class SiteSettings(models.Model):
-	site = models.ForeignKey(Site, verbose_name=_('Site'), related_name='settings', unique=True)
+	site = models.OneToOneField(Site, verbose_name=_('Site'), related_name='settings')
 	language = models.CharField(verbose_name=_('Language'), max_length=32)
 
 	# TODO: I think it's wrong

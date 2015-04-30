@@ -12,7 +12,7 @@ from . import models as SEO
 
 class Redirect(object):
 	def process_request(self, request):
-		from_domain = request.META.get('HTTP_HOST')
+		from_domain = request.get_host()
 		from_url = request.path_info
 
 		if request.is_secure():
@@ -45,10 +45,8 @@ class Host(object):
 
 class SwitchLocale(LocaleMiddleware):
 	def process_request(self, request):
-		site_settings = SEO.SiteSettings.objects.filter(site=request.site, public=True).first()
-
-		if site_settings and site_settings.language:
-			language = site_settings.language
+		if hasattr(request.site, 'settings'):
+			language = request.site.settings.language
 		else:
 			language = settings.LANGUAGE_CODE
 
@@ -58,9 +56,10 @@ class SwitchLocale(LocaleMiddleware):
 
 class SwitchTemplate(object):
 	def process_request(self, request):
-		site_settings = SEO.SiteSettings.objects.filter(site=request.site, public=True).first()
-
-		if site_settings and site_settings.template:
+		if hasattr(request.site, 'settings') and request.site.settings.template:
 			settings.TEMPLATE_DIRS = (
-				site_settings.template,
+				request.site.settings.template,
 			) + settings.TEMPLATE_DIRS
+
+		if hasattr(settings, 'TEMPLATES'):
+			settings.TEMPLATES[0]['DIRS'].append(request.site.settings.template)
