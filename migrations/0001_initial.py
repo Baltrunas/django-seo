@@ -10,9 +10,9 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ('sites', '0002_alter_domain_unique'),
-    ]
+    # dependencies = [
+    #     ('sites', '0002_alter_domain_unique'),
+    # ]
 
     operations = [
         migrations.CreateModel(
