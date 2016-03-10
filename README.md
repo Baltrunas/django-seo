@@ -12,7 +12,7 @@ Best SEO app for django. Allow to configure robots.txt, locale for domain, setup
 'apps.seo.middleware.SwitchLocale',
 'apps.seo.middleware.SwitchTemplate',
 ```
-* Add to urls.py ```url(r'^robots.txt$', 'seo.views.robots', name='robots'),```
+* Add to urls.py ```url(r'^', include('apps.seo.urls')),```
 * Add this code in your template between &lt;head&gt; and &lt;/head&gt;
 ```html
 <title>{% firstof seo.title title %} &rarr; {{ site.name }}</title>
