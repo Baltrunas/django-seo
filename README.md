@@ -1,51 +1,69 @@
 # django-seo
-Best SEO app for django. Allow to configure robots.txt, locale for domain, setup title, keywords, description, seo texts for all pages in admin panel.
+Realy good SEO app for django. 
 
+Allows you:
+* Configure robots.txt
+* Setup 301 redirects with RegExp support
+* Setup meta data by absoulute puth-url
+* Create extra settings
+* Switch domain language
+* Switch domain template
+
+Last test on Django 1.9.4, but I thitk in will work prety well on all major versions.
+
+<!-- # Requeremnts -->
+<!-- ```pip install django-helpfull``` -->
 
 # Install
 * Add to INSTALLED_APPS ```'apps.seo',```
 * Add to TEMPLATE_CONTEXT_PROCESSORS ```'apps.seo.context_processors.seo',```
 * Add to MIDDLEWARE_CLASSES
+```python
+'apps.seo.middleware.Host', # Don't use SITE_ID with it
+'apps.seo.middleware.Redirect', # For redirects
+'apps.seo.middleware.SwitchLocale', # For multilanguages sites
+'apps.seo.middleware.SwitchTemplate', # For site with difference templates
 ```
-'apps.seo.middleware.Host',
-'apps.seo.middleware.Redirect',
-'apps.seo.middleware.SwitchLocale',
-'apps.seo.middleware.SwitchTemplate',
-```
+
 * Add to urls.py ```url(r'^', include('apps.seo.urls')),```
-* Add this code in your template between &lt;head&gt; and &lt;/head&gt;
+
+* Add this code in your template between ```&lt;head&gt; and &lt;/head&gt;```
+
 ```html
 <title>{% firstof seo.title title %} &rarr; {{ site.name }}</title>
 <meta name='keywords' content='{% firstof seo.keywords keywords %}'>
 <meta name='description' content='{% firstof seo.description description %}'>
 {{ seo.head_code|safe }}
 ```
-* Add ```{{ seo.head_code|safe }}``` to footer
+* Add ```{{ seo.footer_code|safe }}``` to footer
 * Add ```{{ seo.intro|safe }}``` before main content
 * Add ```{{ seo.outro|safe }}``` after main content
+* Add ```{{ site.settings.code_head|safe }}``` to **head** global settings for site
+* Add ```{{ site.settings.code_footer|safe }}``` to **footer** global settings for site
+* Migrate```python manage.py migrate seo```
 
-* Sync bata base ```./manage.py syncdb```
 
-
-# TODO
-* PIP
+# ToDo
+* Sitemap
 * Documentation
+* PyPI
+* Exptra meta data
 
-* Template changer to pages
-
-* SitesGroups
-
+# Thing about
 * Language as model
 * Site languages for multi languages sites
 * Language changer type
-
 * Add logic to redirects
 * Add logic to template changer
 
-* Sitemap
+# May be added to SiteSettings model as part of django-lp
 
-# Improve
-* https://github.com/thisismess/django-seo-cascade
-* https://github.com/willhardy/django-seo
-* http://pypi.python.org/pypi/django-seo
-* http://pragmaticstartup.wordpress.com/2013/04/08/12-seo-tips-for-django/
+```python
+title = models.CharField(verbose_name=_('Title'), max_length=128)
+email = models.EmailField(max_length=128, verbose_name=_('E-Mail'))
+send_email = models.BooleanField(verbose_name=_('Send E-Mail'), default=True)
+phone = models.CharField(max_length=32, verbose_name=_('Phone'))
+send_sms = models.BooleanField(verbose_name=_('Send SMS'), default=True)
+sms_key = models.CharField(verbose_name=_('SMS.RU Key'), max_length=64, blank=True, null=True)
+sms_name = models.CharField(verbose_name=_('SMS Name'), help_text=_('From 2 to 11 Latin characters.'), max_length=11)
+```
