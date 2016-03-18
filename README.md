@@ -67,3 +67,69 @@ send_sms = models.BooleanField(verbose_name=_('Send SMS'), default=True)
 sms_key = models.CharField(verbose_name=_('SMS.RU Key'), max_length=64, blank=True, null=True)
 sms_name = models.CharField(verbose_name=_('SMS Name'), help_text=_('From 2 to 11 Latin characters.'), max_length=11)
 ```
+
+
+
+<!-- 
+
+
+Widgets
+	Widgets handling input of text
+		TextInput
+		NumberInput
+		EmailInput
+		URLInput
+		PasswordInput
+		HiddenInput
+		DateInput
+		DateTimeInput
+		TimeInput
+		Textarea
+
+	Selector and checkbox widgets
+		CheckboxInput
+		Select
+		NullBooleanSelect
+		SelectMultiple
+		RadioSelect
+		CheckboxSelectMultiple
+
+	File upload widgets
+		FileInput
+		ClearableFileInput
+
+	Composite widgets
+		MultipleHiddenInput
+		SplitDateTimeWidget
+		SplitHiddenDateTimeWidget
+		SelectDateWidget
+
+
+Built-in Field classes
+	- BooleanField
+	+ CharField
+	+\- ChoiceField
+	- TypedChoiceField
+	+ DateField
+	+ DateTimeField
+	+ DecimalField
+	+ DurationField
+	+ EmailField
+	+ FileField
+	+ FilePathField
+	+ FloatField
+	+ ImageField
+	+ IntegerField
+	+ GenericIPAddressField
+	- MultipleChoiceField
+	- TypedMultipleChoiceField
+	- NullBooleanField
+	+ RegexField
+	+ SlugField
+	+ TimeField
+	+ URLField
+	+ UUIDField
+
+
+
+-->
