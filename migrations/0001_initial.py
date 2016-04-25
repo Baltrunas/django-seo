@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('header', models.CharField(max_length=256, verbose_name='Header')),
                 ('keywords', models.CharField(blank=True, max_length=1024, null=True, verbose_name='Keywords')),
                 ('description', models.CharField(blank=True, max_length=2048, null=True, verbose_name='Description')),
-                ('url', models.CharField(max_length=2048, verbose_name='URL')),
+                ('url', models.CharField(max_length=512, verbose_name='URL')),
                 ('intro', models.TextField(blank=True, null=True, verbose_name='Intro')),
                 ('outro', models.TextField(blank=True, null=True, verbose_name='Outro')),
                 ('head_code', models.TextField(blank=True, null=True, verbose_name='Head Code')),
