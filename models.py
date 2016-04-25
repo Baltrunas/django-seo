@@ -65,7 +65,7 @@ class Redirect(models.Model):
 
 
 class SiteSettings(models.Model):
-	site = models.OneToOneField(Site, verbose_name=_('Site'), related_name='settings')
+	site = models.ForeignKey(Site, verbose_name=_('Site'), related_name='settings')
 	language = models.CharField(verbose_name=_('Language'), max_length=32)
 
 	# TODO: I think it's wrong
@@ -95,8 +95,9 @@ class SiteSettings(models.Model):
 	def __init__(self, *args, **kwargs):
 
 		super(SiteSettings, self).__init__(*args, **kwargs)
-		for es in self.site.extra_settings.all():
-			setattr(self.site, es.key, es.value)
+		if hasattr(self, 'site'):
+			for es in self.site.extra_settings.all():
+				setattr(self.site, es.key, es.value)
 
 	class Meta:
 		verbose_name = _('Site Settings')
