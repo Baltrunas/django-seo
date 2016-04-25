@@ -10,7 +10,7 @@ class Data(models.Model):
 	header = models.CharField(verbose_name=_('Header'), max_length=256)
 	keywords = models.CharField(verbose_name=_('Keywords'), max_length=1024, blank=True, null=True)
 	description = models.CharField(verbose_name=_('Description'), max_length=2048, blank=True, null=True)
-	url = models.CharField(verbose_name=_('URL'), max_length=512)
+	url = models.CharField(verbose_name=_('URL'), max_length=256)
 
 	intro = models.TextField(verbose_name=_('Intro'), blank=True, null=True)
 	outro = models.TextField(verbose_name=_('Outro'), blank=True, null=True)
