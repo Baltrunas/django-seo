@@ -65,7 +65,7 @@ class Redirect(models.Model):
 
 
 class SiteSettings(models.Model):
-	site = models.ForeignKey(Site, verbose_name=_('Site'), related_name='settings')
+	site = models.OneToOneField(Site, verbose_name=_('Site'), related_name='settings')
 	language = models.CharField(verbose_name=_('Language'), max_length=32)
 
 	# TODO: I think it's wrong
