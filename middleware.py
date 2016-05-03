@@ -10,6 +10,15 @@ from django.conf import settings
 from . import models as SEO
 
 
+class Host(object):
+	def process_request(self, request):
+		try:
+			request.site = get_current_site(request)
+		except:
+			request.site = None
+		request.url = request.path_info
+
+
 class Redirect(object):
 	def process_request(self, request):
 		from_domain = request.get_host()
@@ -35,12 +44,6 @@ class Redirect(object):
 			elif redirect.from_url == from_url:
 				result_url = redirect.to_protocol + redirect.to_domain + redirect.to_url
 				return http.HttpResponsePermanentRedirect(result_url)
-
-
-class Host(object):
-	def process_request(self, request):
-		request.site = get_current_site(request)
-		request.url = request.path_info
 
 
 class SwitchLocale(LocaleMiddleware):
