@@ -98,6 +98,7 @@ class SiteSettings(models.Model):
 		if hasattr(self, 'site'):
 			for es in self.site.extra_settings.all():
 				setattr(self.site, es.key, es.value)
+				setattr(self, es.key, es.value)
 
 	class Meta:
 		verbose_name = _('Site Settings')
