@@ -93,7 +93,7 @@ class SiteSettings(models.Model):
 	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
 
 	def __init__(self, *args, **kwargs):
-
+		print 'init'
 		super(SiteSettings, self).__init__(*args, **kwargs)
 		if hasattr(self, 'site'):
 			for es in self.site.extra_settings.all():
@@ -121,12 +121,12 @@ class ExtraSettings(models.Model):
 		('file', _('File')),
 	)
 	type = models.CharField(_('Type'), max_length=32, choices=TYPE)
-	value = models.FileField(_('Value'), max_length=50000, null=True, blank=True)
+	value = models.FileField(_('Value'), max_length=5000, null=True, blank=True)
 
 	def get_value(self):
 		if self.type == 'text':
 			if self.value:
-				short = '%s' % self.value
+				short = u'%s' % self.value
 				return short[:200] + '...'
 		else:
 			return self.value
