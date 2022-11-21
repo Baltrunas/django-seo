@@ -20,7 +20,7 @@ Setup
 .. code-block:: python
 
 	'seo.middleware.RedirectMiddleware',
-	'seo.middleware.SwitchLocale',
+	'seo.middleware.SwitchLocaleMiddleware',
 
 * Add to urls.py ``path("", include("apps.seo.urls")),``
 * Add this code in your template between <head> and </head>

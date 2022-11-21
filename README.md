@@ -17,8 +17,7 @@ Last test on Django 4.1.3
 * Add to MIDDLEWARE_CLASSES
 ```python
 'apps.seo.middleware.RedirectMiddleware', # For redirects
-'apps.seo.middleware.SwitchLocale', # For multi-languages sites
-'apps.seo.middleware.SwitchTemplate', # For site with difference templates
+'apps.seo.middleware.SwitchLocaleMiddleware', # For multi-languages sites
 ```
 
 * Add to urls.py ```path("", include("apps.seo.urls")),```
@@ -40,7 +39,7 @@ Last test on Django 4.1.3
 
 
 # ToDo
-* Rewrite SwitchLocale
+* Update SwitchLocale from django2-cms
 * 
 * 
 * Documentation

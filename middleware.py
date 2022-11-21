@@ -41,8 +41,11 @@ class RedirectMiddleware(object):
         return self.get_response(request)
 
 
-class SwitchLocale(LocaleMiddleware):
-    def process_request(self, request):
+class SwitchLocaleMiddleware(LocaleMiddleware):
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
         if hasattr(request.site, "settings"):
             language = request.site.settings.language
         else:
@@ -50,3 +53,5 @@ class SwitchLocale(LocaleMiddleware):
 
         translation.activate(language)
         request.LANGUAGE_CODE = language
+
+        return self.get_response(request)
