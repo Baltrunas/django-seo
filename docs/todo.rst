@@ -6,17 +6,11 @@ To Do
 * Documentation
 
 * Template changer to pages
-
-* SitesGroups
-
-* Language as model
 * Site languages for multi languages sites
 * Language changer type
 
 * Add logic to redirects
 * Add logic to template changer
-
-* Sitemap
 
 Analize
 -------

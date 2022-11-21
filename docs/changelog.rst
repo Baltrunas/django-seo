@@ -44,3 +44,12 @@ Change Log
 2012.07.13
 ---------
 * Init Now, SEO is a standalone application.
+
+2022.11.21
+---------
+* Glabal clear and update
+* Django 4 support
+* Python 3.10 support
+* Add sitemap.xml support
+* Delete Host middleware
+* Delete Switch domain template

@@ -19,22 +19,21 @@ Setup
 
 .. code-block:: python
 
-	'seo.middleware.Host',
-	'seo.middleware.Redirect',
+	'seo.middleware.RedirectMiddleware',
 	'seo.middleware.SwitchLocale',
 
-* Add to urls.py ``url(r'^robots.txt$', 'seo.views.robots', name='robots'),``
+* Add to urls.py ``path("", include("apps.seo.urls")),``
 * Add this code in your template between <head> and </head>
 
 .. code-block:: html
 
-	<title>{% firstof seo.title title %} &rarr; {{site.name}}</title>
+	<title>{% firstof seo.title title %} &rarr; {{ request.site.name }}</title>
 	<meta name='keywords' content='{% firstof seo.keywords keywords %}'>
 	<meta name='description' content='{% firstof seo.description description %}'>
-	{{ seo.head_code|safe }}
+	{{ seo.head|safe }}
 
-* Add ``{{ seo.head_code|safe }}`` to footer
+* Add ``{{ seo.footer|safe }}`` to footer
 * Add ``{{ seo.intro|safe }}`` before main content
 * Add ``{{ seo.outro|safe }}`` after main content
 
-* Sync bata base ``./manage.py syncdb``
+* Migrate bata base ``./manage.py migrate seo``

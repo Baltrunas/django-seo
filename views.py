@@ -1,16 +1,15 @@
-from django.template import RequestContext
-from django.template import Template
-
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 
 
-def robots(request):
-	if hasattr(request.site, 'settings'):
-		robots_template = request.site.settings.robots 
-	else:
-		robots_template = ''
+def robots_txt(request):
+    if hasattr(request.site, "settings"):
+        return HttpResponse(request.site.settings.robots_xml, content_type="text/xml")
+    else:
+        raise Http404
 
-	tpl = Template(robots_template)
 
-	html = tpl.render(RequestContext(request))
-	return HttpResponse(html, content_type='text/plain')
+def sitemap_xml(request):
+    if hasattr(request.site, "settings"):
+        return HttpResponse(request.site.settings.sitemap_xml, content_type="text/xml")
+    else:
+        raise Http404
