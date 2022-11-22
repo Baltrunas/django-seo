@@ -1,15 +1,17 @@
 # django-seo
-Realy good SEO app for django. 
+Simple SEO app for django.
+
 
 Allows you:
+* Setup meta data by absoulute puth-url
+* Setup redirects with RegExp support
 * Configure robots.txt
 * Configure sitemap.xml
-* Setup 301 redirects with RegExp support
-* Setup meta data by absoulute puth-url
-* Create extra settings
-* Switch domain language
+* Create extra site settings
+* Switch site language by domain 
 
-Last test on Django 4.1.3
+Django 2.2 to 4.1.3
+Python 3.7 to 3.10
 
 # Install
 * Add to INSTALLED_APPS ```'apps.seo',```
